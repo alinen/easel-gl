@@ -105,3 +105,16 @@ foreach (test ${TESTS})
   add_test(NAME ${test} COMMAND ${test_name})
   target_link_libraries(${test_name} ${CORE})
 endforeach()
+
+# Video POC
+set(FFMPEGLIBS avcodec avutil avformat swscale)
+
+add_executable(test-ffmpeg 
+   video/loadvideo.cpp 
+   video/test-ffmpeg.cpp ${SHADERS})
+target_link_libraries(test-ffmpeg ${CORE} ${FFMPEGLIBS})
+
+add_executable(video 
+   video/loadvideo.cpp 
+   video/vizvideo.cpp ${SHADERS})
+target_link_libraries(video ${CORE} ${FFMPEGLIBS})
